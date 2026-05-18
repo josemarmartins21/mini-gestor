@@ -6,24 +6,18 @@
 <x-title-section>Novo Produto</x-title-section>
 
     <x-container>
-        <x-form-container 
-            hx-post="{{ route('products.store') }}" 
-        >
+        <x-form-container>
             @csrf
 
-  
             <input-container>
-                <label-input for="nome">Nome</label-input>
-                <x-input-text name="nome" id="nome" placeholder="Nome"/>
+                <label-input>Produto</label-input>
+                <x-input-select>
+                    <option value="">Selecione um produto</option>
+                </x-input-select>
             </input-container>
 
             <x-input-container>
-                <label-input for="preco">Preço</label-input>
-                <x-input-text name="preco" id="preco" placeholder="Preço"/>
-            </x-input-container>
-
-            <x-input-container>
-                <label-input for="quantidade">Quantidade</label-input>
+                <label-input>Quantidade</label-input>
                 <x-input-text name="quantidade" id="quantidade" placeholder="Quantidade"/>
             </x-input-container>
    

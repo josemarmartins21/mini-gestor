@@ -3,7 +3,7 @@
 @section('title', 'Editar Produto')
 
 @section('content')
-<x-title-section>Editar Produto</x-title-section>
+<x-title-section>Editar Venda</x-title-section>
 
     <x-container>
         <x-form-container>
@@ -11,16 +11,16 @@
   
             <input-container>
                 <label-input>Nome</label-input>
-                <x-input-text name="name" id="name" />
+                <x-input-text placeholder="Nome" name="name" id="name" />
             </input-container>
 
             <x-input-container>
                 <label-input>Preço</label-input>
-                <x-input-text name="price" id="price" />
+                <x-input-text placeholder="Preço" name="price" id="price" />
             </x-input-container>
    
             <x-form-button>
-                Atualizar Produto
+                Atualizar Venda
             </x-form-button>
         </x-form-container>
     </x-container>  
