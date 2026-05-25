@@ -22,6 +22,10 @@
             <x-form-button>
                 Atualizar Venda
             </x-form-button>
+
+            <x-error-form-message />
+
+            <x-alert />
         </x-form-container>
     </x-container>  
 @endsection

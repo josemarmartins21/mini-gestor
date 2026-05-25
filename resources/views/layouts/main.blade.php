@@ -20,7 +20,7 @@
         <menu class="w-8/10 mx-auto">
             <ul class="flex gap-6 justify-center text-2xl text-white font-bold">
                 <li><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="{{ route('products.index') }}">Produtos</a></li>
+                <li><a href="{{ route('produtos.index') }}">Produtos</a></li>
                 <li><a href="{{ route('vendas.index') }}">Vendas</a></li>
                 <li><a href="#">Relatórios</a></li>
                 <li><a href="#">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>

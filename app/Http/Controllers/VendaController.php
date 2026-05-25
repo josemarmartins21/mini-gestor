@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VendaRequest;
+use App\Models\Produto;
 use App\Models\Venda;
+use App\services\contracts\VendaInterface;
 use Illuminate\Http\Request;
 
 class VendaController extends Controller
 {
+
+    public function __construct(
+        private VendaInterface $vendaProxy,
+    )
+    {
+        
+    }
     /**
      * Display a listing of the resource.
      */
@@ -20,15 +30,28 @@ class VendaController extends Controller
      */
     public function create()
     {
-        return view('vendas.create');
+        $produtos = Produto::select(
+            'id', 
+            'nome',
+        )->orderBy('nome')
+        ->get();
+        
+        return view('vendas.create', compact('produtos'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(VendaRequest $request)
     {
-        //
+        try {
+            $validated = $request->validated();
+    
+            $this->vendaProxy->create($validated);
+    
+            return redirect()->route('vendas.index');
+
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            return redirect()->back()->with('error', $th->getMessage());  
+        }
     }
 
     /**

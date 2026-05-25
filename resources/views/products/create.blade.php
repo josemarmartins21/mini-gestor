@@ -7,23 +7,24 @@
 
     <x-container>
         <x-form-container 
-            hx-post="{{ route('products.store') }}" 
+            action="{{ route('produtos.store') }}"
+            method="POST"
         >
             @csrf
 
   
-            <input-container>
-                <label-input for="nome">Nome</label-input>
+            <x-input-container>
+                <x-label-input for="nome">Nome</x-label-input>
                 <x-input-text name="nome" id="nome" placeholder="Nome"/>
-            </input-container>
+            </x-input-container>    
 
             <x-input-container>
-                <label-input for="preco">Preço</label-input>
+                <x-label-input for="preco">Preço</x-label-input>
                 <x-input-text name="preco" id="preco" placeholder="Preço"/>
             </x-input-container>
 
             <x-input-container>
-                <label-input for="quantidade">Quantidade</label-input>
+                <x-label-input for="quantidade">Quantidade</x-label-input>
                 <x-input-text name="quantidade" id="quantidade" placeholder="Quantidade"/>
             </x-input-container>
    
@@ -31,5 +32,9 @@
                 Criar Produto
             </x-form-button>
         </x-form-container>
+
+        <x-error-form-message />
+
+        <x-alert />
     </x-container>  
 @endsection

@@ -1,3 +1,5 @@
-<form {{ $attributes }}>
+<form
+    {{ $attributes }}
+>
     {{ $slot }}
 </form>

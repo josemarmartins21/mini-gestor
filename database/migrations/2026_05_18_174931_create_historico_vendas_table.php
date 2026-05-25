@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('historico_vendas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('venda_id')->constrained('vendas')->onDelete('cascade');
+            $table->foreignId('venda_id')->nullable()->constrained('vendas')->onDelete('cascade');
             $table->foreignId('produto_id')->constrained('produtos')->onDelete('cascade');
             $table->integer('quantidade');
             $table->decimal('preco_unitario', 10, 2);

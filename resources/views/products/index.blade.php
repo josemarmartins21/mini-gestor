@@ -16,29 +16,36 @@
                 </tr>
             </thead>
             <tbody class="text-zinc-600">
-                <tr class="p-2">
-                    <td>1</td>
-                    <td>Produto 1</td>
-                    <td>R$ 10,00</td>
-                    <td>10</td>
-                    <td>
-                        <a href="#" class="text-blue-500 hover:text-blue-700">Editar</a>
-                        <a href="#" class="text-red-500 hover:text-red-700 ml-2">Excluir</a>
-                    </td>
-                </tr>
-                <tr class="p-2">
-                    <td>1</td>
-                    <td>Produto 1</td>
-                    <td>R$ 10,00</td>
-                    <td>10</td>
-                    <td>
-                        <a href="#" class="text-blue-500 hover:text-blue-700">Editar</a>
-                        <a href="#" class="text-red-500 hover:text-red-700 ml-2">Excluir</a>
-                    </td>
-                </tr>
+                @foreach ($produtos as $produto)
+                    <tr class="p-2">
+                        <td>{{ $produto->id }}</td>
+                        <td>{{ $produto->nome }}</td>
+                        <td>R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
+                        <td>{{ $produto->qtd }}</td>
+                        <td>
+                            <a href="{{ route('produtos.edit', ['produto' => $produto->id]) }}" class="text-blue-500 hover:text-blue-700">
+                                Editar
+                            </a>
+                            <x-form-container 
+                                hx-post="{{ route('produtos.destroy', ['produto' => $produto->id]) }}" 
+                                class="inline" 
+                                hx-target="#message"
+                                onclick="return confirm('Tem a certeza que deseja eliminar?')"
+                            >
+                                @csrf
+
+                                @method('DELETE')
+
+                                <button type="submit" class="text-red-500 hover:text-red-700 ml-2">
+                                    Excluir
+                                </button>
+                            </x-form-container>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
-
-    <x-btn-float href="{{ route('products.create') }}" />
+        <div id="message"></div>
+    <x-btn-float href="{{ route('produtos.create') }}" />
 </x-container>
 @endsection
