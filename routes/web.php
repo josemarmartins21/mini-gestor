@@ -11,4 +11,4 @@ Route::get('/', HomeController::class)->name('home');
 Route::resource('produtos', ProdutoController::class);
 
 
-Route::resource('vendas', VendaController::class);
+Route::resource('vendas', VendaController::class)->except(['edit', 'show']);

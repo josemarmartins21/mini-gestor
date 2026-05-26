@@ -6,7 +6,7 @@ create trigger incrementar_qtd
 
         BEGIN
             update produtos
-            set qtd = qtd + OLD.qtd
+            set quantidade = quantidade + OLD.quantidade
             where id = OLD.produto_id;
         END ;
 

@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\VendaRequest;
 use App\Models\Produto;
 use App\Models\Venda;
+use App\services\contracts\VendaCrud;
 use App\services\contracts\VendaInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class VendaController extends Controller
 {
 
     public function __construct(
         private VendaInterface $vendaProxy,
+        private VendaCrud $venda,
     )
     {
         
@@ -22,7 +25,11 @@ class VendaController extends Controller
      */
     public function index()
     {
-        return view('vendas.index');
+       // dd($this->venda->list());
+        
+        return view('vendas.index', [
+            'vendas' => $this->venda->list(),
+        ]);
     }
 
     /**
@@ -48,6 +55,8 @@ class VendaController extends Controller
     
             return redirect()->route('vendas.index');
 
+        } catch (\InvalidArgumentException $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         } catch (\Throwable $th) {
             dd($th->getMessage());
             return redirect()->back()->with('error', $th->getMessage());  
@@ -67,7 +76,7 @@ class VendaController extends Controller
      */
     public function edit(Venda $venda)
     {
-        //
+        return view('vendas.edit', compact('venda'));
     }
 
     /**
@@ -75,7 +84,28 @@ class VendaController extends Controller
      */
     public function update(Request $request, Venda $venda)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:50',
+                'price' => 'required|numeric',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $validated = $validator->validated();
+
+            $venda->update([
+                'nome' => $validated['name'],
+                'preco_unitario' => $validated['price'],
+            ]);
+
+            return redirect()->route('vendas.index');
+
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -83,6 +113,12 @@ class VendaController extends Controller
      */
     public function destroy(Venda $venda)
     {
-        //
+        try {
+            $venda->delete();
+
+            return redirect()->route('vendas.index');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 }

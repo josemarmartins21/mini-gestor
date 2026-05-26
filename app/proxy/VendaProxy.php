@@ -23,6 +23,10 @@ class VendaProxy implements VendaInterface
             $data['produto_id']
         )->first();
 
+        if ($produto->quantidade > $data['quantidade']) {
+            throw new \InvalidArgumentException('Quantidade insuficiente em estoque');
+        }
+
         $data['historico_venda'] = HistoricoVenda::create([
             'produto_id' => $data['produto_id'],
             'quantidade' => $data['quantidade'],

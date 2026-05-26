@@ -27,4 +27,11 @@ class VendaRequest extends FormRequest
             'quantidade' => 'required|numeric|min:1|integer',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'produto_id' => 'produto',
+        ];
+    }
 }

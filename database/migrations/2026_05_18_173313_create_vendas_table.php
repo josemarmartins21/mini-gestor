@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vendas', function (Blueprint $table) {
             $table->id();
-            $table->date('data');
+            $table->date('date_time');
             $table->decimal('preco_total', 10, 2);
             $table->timestamps();
         });

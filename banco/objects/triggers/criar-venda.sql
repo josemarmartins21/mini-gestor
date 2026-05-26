@@ -6,8 +6,8 @@ CREATE TRIGGER create_venda
 
 	BEGIN
         UPDATE vendas
-        SET total = total + NEW.price
+        SET preco_total = preco_total + NEW.price
         WHERE id = NEW.venda_id; 
-    END $$
+    END \\
 
 DELIMITER ;    

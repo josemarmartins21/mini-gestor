@@ -9,14 +9,14 @@
         <x-form-container>
             @csrf
   
-            <input-container>
-                <label-input>Nome</label-input>
-                <x-input-text placeholder="Nome" name="name" id="name" />
-            </input-container>
+            <x-input-container>
+                <x-label-input for="nome">Nome</x-label-input>
+                <x-input-text placeholder="Nome" name="name" id="nome" value="{{ old('nome', $venda->nome) }}" />
+            </x-input-container>
 
             <x-input-container>
-                <label-input>Preço</label-input>
-                <x-input-text placeholder="Preço" name="price" id="price" />
+                <x-label-input for="preco_unitario">Preço</x-label-input>
+                <x-input-text placeholder="Preço" name="price" id="preco_unitario" value="{{ old('preco_unitario', $venda->preco_unitario) }}" />
             </x-input-container>
    
             <x-form-button>

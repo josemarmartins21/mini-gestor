@@ -1,1 +1,1 @@
-<label for="name" class="block text-gray-700 text-sm font-bold mb-2">{{ $slot }}</label>
+<label for="{{ $attributes->get('for') }}" class="block text-gray-700 text-sm font-bold mb-2">{{ $slot }}</label>
