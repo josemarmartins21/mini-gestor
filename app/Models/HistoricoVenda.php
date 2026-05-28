@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Venda;
 
 class HistoricoVenda extends Model
 {
@@ -14,4 +15,9 @@ class HistoricoVenda extends Model
         'preco_unitario',
 
     ];
+
+    public function venda()
+    {
+        return $this->belongsTo(Venda::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VendaRequest;
+use App\Models\HistoricoVenda;
 use App\Models\Produto;
 use App\Models\Venda;
 use App\services\contracts\VendaCrud;
@@ -114,6 +115,7 @@ class VendaController extends Controller
     public function destroy(Venda $venda)
     {
         try {
+            $venda->historicoVendas->delete();
             $venda->delete();
 
             return redirect()->route('vendas.index');
